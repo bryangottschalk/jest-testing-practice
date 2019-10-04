@@ -1,5 +1,33 @@
 const functions = require('./functions');
 
+// init database before each func, then clear it after each
+const initDatabase = () => console.log('Database Initialized...');
+const closeDatabase = () => console.log('Database Closed...');
+
+// beforeEach(() => initDatabase());
+// afterEach(() => closeDatabase());
+
+// run once before all of the tests, close once after all the tests run
+
+beforeAll(() => initDatabase());
+afterAll(() => closeDatabase());
+
+// target certain tests with describe blocks
+const nameCheck = () => console.log('Checking Name...');
+describe('Checking Names', () => {
+  beforeEach(() => nameCheck()); // ran twice, once for each item in describe
+
+  test('User is Jeff', () => {
+    const user = 'Jeff';
+    expect(user).toBe('Jeff');
+  });
+
+  test('User is Karen', () => {
+    const user = 'Karen';
+    expect(user).toBe('Karen');
+  });
+});
+
 //toBe
 test('Adds 2 + 2 to equal 4', () => {
   expect(functions.add(2, 2)).toBe(4);
